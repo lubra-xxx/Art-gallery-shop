@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mythic Cosmic Majesty – Kunstdruck</title>
+
+<style>
+:root {
+  --bg: #0b1020;
+  --card: #0f172a;
+  --frame: #020617;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --price: #10b981;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #1e293b, var(--bg));
+  color: var(--text);
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 20px;
+}
+
+.card {
+  background: linear-gradient(145deg, #020617, #020617);
+  border-radius: 28px;
+  padding: 36px;
+  box-shadow: 0 50px 100px rgba(0,0,0,0.7);
+}
+
+/* Layout */
+.content {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 40px;
+}
+
+/* Bild */
+.frame {
+  background: var(--frame);
+  padding: 16px;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 25px 60px rgba(0,0,0,0.8);
+}
+
+.frame img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+}
+
+/* Text */
+.info h1 {
+  font-size: 34px;
+  margin: 0 0 16px;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--muted);
+  margin-bottom: 32px;
+  white-space: pre-wrap;
+}
+
+/* Sizes */
+.sizes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.size {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.size h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--price);
+  margin-bottom: 14px;
+}
+
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+/* Footer */
+.footer {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.footer a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer a:hover {
+  color: white;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="card">
+
+    <div class="content">
+
+      <div class="frame">
+        <img src="https://tempfile.aiquickdraw.com/h/cc06a69c2fe208d866b056d0a9c0ca5a_1766441760.png" alt="Mythic Cosmic Majesty">
+      </div>
+
+      <div class="info">
+        <h1>Mythic Cosmic Majesty</h1>
+        <div class="description">Behold a glimpse into the mythical cosmic world, delicately framed by twisted roots and a vast alien valley stretching into the distance, all under a grand ringed planet 🪐✨. Our artist’s intent captures the awe-inspiring and transcendent atmosphere. Pressed on 170 gsm semi-glossy paper and framed in black durable pine wood 🖼️, the celestial lighting brings the scene to life. Dive in and feel the transcendence. 🌌🎆</div>
+
+        <div class="sizes">
+          <div class="size">
+            <h3>A3 · 29,7 × 42 cm</h3>
+            <div class="price">39,99 €</div>
+            <a class="btn" href="https://checkout.stripe.com/c/pay/cs_live_b1WlnBlKnQ62ff2SM12YIDOpv4gxpCnP5Q0v2IRUOYBNHJ8cngqDt0Y0xH#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blppbHNgWjA0VmJkfXNBdDNkXUFwNHJiPVJpbnZ9Y0ptQ2RLTGpyM1B1TXc9QkB9fEdyQ3VLd3VIcDBDU3w0XXJhV2ZSTGQxSDx1U3RAdnZPRD1PRHxja2FUXERRZGJdNTVIQ38ySWxwUScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl" target="_blank">Buy A3 </a>
+          </div>
+
+          <div class="size">
+            <h3>A2 · 42 × 59,4 cm</h3>
+            <div class="price">64,99 €</div>
+            <a class="btn" href="https://checkout.stripe.com/c/pay/cs_live_b13OjaIgaA9Fu0cg62zLUj89dUm2XUpHkeU7UcArFhHcHvKOsGeFIn6ixU#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blppbHNgWjA0VmJkfXNBdDNkXUFwNHJiPVJpbnZ9Y0ptQ2RLTGpyM1B1TXc9QkB9fEdyQ3VLd3VIcDBDU3w0XXJhV2ZSTGQxSDx1U3RAdnZPRD1PRHxja2FUXERRZGJdNTVIQ38ySWxwUScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl" target="_blank">Buy A2 </a>
+          </div>
+
+          <div class="size">
+            <h3>A1 · 59,4 × 84,1 cm</h3>
+            <div class="price">79,99 €</div>
+            <a class="btn" href="https://checkout.stripe.com/c/pay/cs_live_b1bQNhP4gTiXQPJaX3uCMDcWmXvDHZncSmyIaqbM219axlzT5CrdL9CRLq#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blppbHNgWjA0VmJkfXNBdDNkXUFwNHJiPVJpbnZ9Y0ptQ2RLTGpyM1B1TXc9QkB9fEdyQ3VLd3VIcDBDU3w0XXJhV2ZSTGQxSDx1U3RAdnZPRD1PRHxja2FUXERRZGJdNTVIQ38ySWxwUScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl" target="_blank">Buy A1 </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <a href="https://frosted-blob-b56.notion.site/Imprint-2d2b4f954da1802c8982c0b4174ff85c?source=copy_link" target="_blank">
+        Impressum
+      </a>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
