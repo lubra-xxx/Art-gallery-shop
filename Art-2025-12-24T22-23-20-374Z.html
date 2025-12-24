@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radiant Transcendence – Kunstdruck</title>
+
+<style>
+:root {
+  --bg: #0b1020;
+  --card: #0f172a;
+  --frame: #020617;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --price: #10b981;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #1e293b, var(--bg));
+  color: var(--text);
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 20px;
+}
+
+.card {
+  background: linear-gradient(145deg, #020617, #020617);
+  border-radius: 28px;
+  padding: 36px;
+  box-shadow: 0 50px 100px rgba(0,0,0,0.7);
+}
+
+/* Layout */
+.content {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 40px;
+}
+
+/* Bild */
+.frame {
+  background: var(--frame);
+  padding: 16px;
+  border-radius: 18px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 25px 60px rgba(0,0,0,0.8);
+}
+
+.frame img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+}
+
+/* Text */
+.info h1 {
+  font-size: 34px;
+  margin: 0 0 16px;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--muted);
+  margin-bottom: 32px;
+  white-space: pre-wrap;
+}
+
+/* Sizes */
+.sizes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.size {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.size h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--price);
+  margin-bottom: 14px;
+}
+
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+/* Footer */
+.footer {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.footer a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer a:hover {
+  color: white;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="card">
+
+    <div class="content">
+
+      <div class="frame">
+        <img src="https://tempfile.aiquickdraw.com/h/ede93df09da043286caa2a65941f024c_1766614773.png" alt="Radiant Transcendence">
+      </div>
+
+      <div class="info">
+        <h1>Radiant Transcendence</h1>
+        <div class="description">Behold the mesmerizing world of high-fantasy, so vividly and meticulously captured in this ultra-detailed epic fantasy illustration, printed on 170 gsm semi-glossy paper. The foreground pulses with other-worldly life as alien shrubs light up the expansive plateau; their glowing veins adding to the mythical aura. The view ascends to the massive celestial body, partially eclipsed, yet brilliantly radiant. High-contrast celestial lighting dances with cosmic blues and emerald greens, carving the scene into layers of awe-inspiring depth. Every inch of it, framed in durable black pine wood, calls upon the viewer to bask in its transcendent beauty. The artist's intention was to elevate the observer into a space of awe, wonder and transcendence. Comes with its own hanging kit.</div>
+
+        <div class="sizes">
+          <div class="size">
+            <h3>A3 · 29,7 × 42 cm</h3>
+            <div class="price">39,99 €</div>
+            <a class="btn" href="https://checkout.stripe.com/c/pay/cs_live_b1eINrH5RohlBlwCLtipwczSE3nTrd7j9pknSXjHBPEHK7pABrBNLJ7UGe#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blppbHNgWjA0VmJkfXNBdDNkXUFwNHJiPVJpbnZ9Y0ptQ2RLTGpyM1B1TXc9QkB9fEdyQ3VLd3VIcDBDU3w0XXJhV2ZSTGQxSDx1U3RAdnZPRD1PRHxja2FUXERRZGJdNTVIQ38ySWxwUScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl" target="_blank">Buy A3 </a>
+          </div>
+
+          <div class="size">
+            <h3>A2 · 42 × 59,4 cm</h3>
+            <div class="price">64,99 €</div>
+            <a class="btn" href="https://checkout.stripe.com/c/pay/cs_live_b1BgtjkqrsNNKq7VJSbFj97LC37AcDy3VaL85KRhrfBl3XRr5nrm0Y4HxL#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blppbHNgWjA0VmJkfXNBdDNkXUFwNHJiPVJpbnZ9Y0ptQ2RLTGpyM1B1TXc9QkB9fEdyQ3VLd3VIcDBDU3w0XXJhV2ZSTGQxSDx1U3RAdnZPRD1PRHxja2FUXERRZGJdNTVIQ38ySWxwUScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl" target="_blank">Buy A2 </a>
+          </div>
+
+          <div class="size">
+            <h3>A1 · 59,4 × 84,1 cm</h3>
+            <div class="price">79,99 €</div>
+            <a class="btn" href="https://checkout.stripe.com/c/pay/cs_live_b1IwJz0DP1BGzpZvlopyuDgCBnCZyTF8WMsqeOxaxmo0B63cLiYZscB8gv#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blppbHNgWjA0VmJkfXNBdDNkXUFwNHJiPVJpbnZ9Y0ptQ2RLTGpyM1B1TXc9QkB9fEdyQ3VLd3VIcDBDU3w0XXJhV2ZSTGQxSDx1U3RAdnZPRD1PRHxja2FUXERRZGJdNTVIQ38ySWxwUScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl" target="_blank">Buy A1 </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <a href="https://frosted-blob-b56.notion.site/Imprint-2d2b4f954da1802c8982c0b4174ff85c?source=copy_link" target="_blank">
+        Impressum
+      </a>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
