@@ -2,51 +2,59 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>KI Kunst kaufen</title>
+  <title>KI Art Gallery</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f2f2f2;
-      text-align: center;
-      padding: 40px;
+      background: #f5f5f5;
+      padding: 20px;
     }
-    button {
-      font-size: 18px;
-      padding: 14px 28px;
-      margin: 12px;
-      border: none;
+    h1 {
+      text-align: center;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 15px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .card a {
+      display: block;
+      margin-top: 10px;
+      padding: 10px;
+      background: black;
+      color: white;
+      text-align: center;
+      text-decoration: none;
       border-radius: 8px;
-      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-<h1>Dein KI-Kunstwerk</h1>
-<p>Wähle eine Größe:</p>
+<h1>🖼️ KI Kunst Galerie</h1>
+<p style="text-align:center;">Alle aktuellen Werke</p>
 
-<div id="buttons">Lade Preise...</div>
+<div class="grid">
+  <!-- MANUELLER START (gleich automatisierbar) -->
 
-<script>
-fetch('/.netlify/functions/update-links')
-  .then(res => res.json())
-  .then(data => {
-    const container = document.getElementById('buttons');
-    container.innerHTML = '';
+  <div class="card">
+    <img src="https://DEIN-BILD-LINK.jpg">
+    <a href="public/Art-2025-12-25T15-48-56-897Z.html">
+      Zum Kunstwerk
+    </a>
+  </div>
 
-    if (!data.prices || data.prices.length === 0) {
-      container.innerText = 'Noch keine Preise vorhanden';
-      return;
-    }
-
-    data.prices.forEach(p => {
-      const btn = document.createElement('button');
-      btn.innerText = `${p.label} – ${p.price}`;
-      btn.onclick = () => window.location.href = p.url;
-      container.appendChild(btn);
-    });
-  });
-</script>
+</div>
 
 </body>
 </html>
