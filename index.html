@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>KI Kunst kaufen</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      text-align: center;
+      padding: 40px;
+    }
+    button {
+      font-size: 18px;
+      padding: 14px 28px;
+      margin: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Dein KI-Kunstwerk</h1>
+<p>Wähle eine Größe:</p>
+
+<div id="buttons">Lade Preise...</div>
+
+<script>
+fetch('/.netlify/functions/update-links')
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById('buttons');
+    container.innerHTML = '';
+
+    if (!data.prices || data.prices.length === 0) {
+      container.innerText = 'Noch keine Preise vorhanden';
+      return;
+    }
+
+    data.prices.forEach(p => {
+      const btn = document.createElement('button');
+      btn.innerText = `${p.label} – ${p.price}`;
+      btn.onclick = () => window.location.href = p.url;
+      container.appendChild(btn);
+    });
+  });
+</script>
+
+</body>
+</html>
