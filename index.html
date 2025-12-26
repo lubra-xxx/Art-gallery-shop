@@ -1,60 +1,120 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>KI Art Gallery</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: white;
-      border-radius: 14px;
-      padding: 15px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-    }
-    .card img {
-      width: 100%;
-      border-radius: 10px;
-    }
-    .card a {
-      display: block;
-      margin-top: 10px;
-      padding: 10px;
-      background: black;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 8px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI Art Gallery</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #fff;
+  }
+  header {
+    text-align: center;
+    padding: 24px 16px;
+    border-bottom: 1px solid #222;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 26px;
+  }
+  header p {
+    margin-top: 8px;
+    color: #aaa;
+    font-size: 14px;
+  }
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+  .product {
+    margin-bottom: 50px;
+    border-bottom: 1px solid #222;
+    padding-bottom: 40px;
+  }
+  .product img {
+    width: 100%;
+    border-radius: 14px;
+    margin-bottom: 14px;
+  }
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  .toggle {
+    font-size: 14px;
+    color: #bbb;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  .description {
+    display: none;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #ddd;
+    margin-bottom: 16px;
+  }
+  .buy {
+    display: block;
+    text-align: center;
+    background: #fff;
+    color: #000;
+    padding: 14px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+</style>
 </head>
+
 <body>
 
-<h1>🖼️ KI Kunst Galerie</h1>
-<p style="text-align:center;">Alle aktuellen Werke</p>
+<header>
+  <h1>KI Art Gallery</h1>
+  <p>Täglich neue KI-Kunstwerke</p>
+</header>
 
-<div class="grid">
-  <!-- MANUELLER START (gleich automatisierbar) -->
-
-  <div class="card">
-    <img src="https://DEIN-BILD-LINK.jpg">
-    <a href="public/Art-2025-12-25T15-48-56-897Z.html">
-      Zum Kunstwerk
-    </a>
-  </div>
-
+<div class="container" id="productList">
+  <!-- Produkte kommen hier rein -->
 </div>
+
+<script>
+fetch("products.json")
+  .then(r => r.json())
+  .then(data => {
+    const list = document.getElementById("productList");
+
+    data.products.forEach((p, i) => {
+      const d = document.createElement("div");
+      d.className = "product";
+      d.innerHTML = `
+        <img src="${p.image}">
+        <div class="title">${p.title}</div>
+        <div class="toggle" onclick="toggleDesc(${i})">
+          Beschreibung anzeigen ▼
+        </div>
+        <div class="description" id="desc-${i}">
+          ${p.description}
+        </div>
+        <a class="buy" href="${p.payment}" target="_blank">
+          Jetzt kaufen
+        </a>
+      `;
+      list.appendChild(d);
+    });
+  });
+
+function toggleDesc(i) {
+  const el = document.getElementById("desc-" + i);
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
+</script>
 
 </body>
 </html>
+
