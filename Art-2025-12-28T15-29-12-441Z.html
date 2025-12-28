@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cosmic Sanctuary</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { 
+  font-family: 'Inter', sans-serif; 
+  background: linear-gradient(145deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%); 
+  color: #f8f9fa; 
+  min-height: 100vh; 
+  overflow-x: hidden;
+  position: relative;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(120,119,198,0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
+  z-index: -1;
+}
+.container { 
+  max-width: 1000px; 
+  margin: 0 auto; 
+  padding: 60px 30px; 
+  text-align: center; 
+  position: relative;
+}
+.art-image { 
+  width: 100%; 
+  max-width: 800px; 
+  border-radius: 32px; 
+  box-shadow: 0 40px 120px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.1);
+  margin-bottom: 60px;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+.art-image:hover { 
+  transform: translateY(-12px) scale(1.02); 
+  box-shadow: 0 60px 160px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.15);
+}
+.title { 
+  font-family: 'Cormorant Garamond', serif; 
+  font-size: clamp(3rem, 8vw, 6rem); 
+  font-weight: 300; 
+  margin: 0 0 30px 0; 
+  letter-spacing: 0.05em; 
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+  text-shadow: 0 8px 32px rgba(255,255,255,0.1);
+}
+.description { 
+  font-size: 1.3rem; 
+  line-height: 1.8; 
+  color: #b8bcc8; 
+  max-width: 750px; 
+  margin: 0 auto 80px auto; 
+  font-weight: 300;
+}
+.buttons-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+  gap: 40px; 
+  margin: 100px 0 80px 0; 
+}
+.size-btn { 
+  position: relative; 
+  background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%); 
+  backdrop-filter: blur(20px); 
+  border: 1px solid rgba(255,255,255,0.12); 
+  border-radius: 28px; 
+  padding: 45px 30px; 
+  text-decoration: none; 
+  color: white; 
+  font-weight: 500; 
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.size-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.6s;
+}
+.size-btn:hover::before { left: 100%; }
+.size-btn:hover { 
+  transform: translateY(-16px) scale(1.04); 
+  border-color: rgba(255,255,255,0.3); 
+  box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+}
+.size-format { font-size: 2.4rem; font-weight: 600; margin-bottom: 12px; }
+.size-price { 
+  font-family: 'Cormorant Garamond', serif; 
+  font-size: 2.8rem; 
+  font-weight: 400; 
+  color: #ffd700; 
+  margin: 8px 0; 
+  text-shadow: 0 4px 16px rgba(255,215,0,0.3);
+}
+.size-dimensions { 
+  font-size: 1.3rem; 
+  opacity: 0.9; 
+  margin-bottom: 16px; 
+  font-weight: 400;
+}
+.size-specs { 
+  font-size: 1rem; 
+  opacity: 0.8; 
+  line-height: 1.5;
+}
+.btn-a1 { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%); }
+.btn-a2 { background: linear-gradient(135deg, #7c2d12 0%, #dc2626 50%, #f87171 100%); }
+.btn-a3 { background: linear-gradient(135deg, #15803d 0%, #22c55e 50%, #4ade80 100%); }
+.impressum-btn { 
+  position: fixed; 
+  bottom: 30px; 
+  left: 30px; 
+  background: rgba(0,0,0,0.7); 
+  backdrop-filter: blur(20px); 
+  border: 1px solid rgba(255,255,255,0.15); 
+  border-radius: 20px; 
+  padding: 14px 24px; 
+  color: #e5e7eb; 
+  font-size: 0.95rem; 
+  font-weight: 500; 
+  text-decoration: none; 
+  transition: all 0.3s ease; 
+  z-index: 1000;
+}
+.impressum-btn:hover { 
+  background: rgba(255,255,255,0.1); 
+  border-color: rgba(255,255,255,0.3); 
+  transform: translateY(-2px);
+}
+@keyframes fadeInUp { 
+  from { opacity: 0; transform: translateY(40px); } 
+  to { opacity: 1; transform: translateY(0); } 
+}
+.container > * { animation: fadeInUp 1.2s ease-out forwards; }
+.container > *:nth-child(1) { animation-delay: 0.1s; }
+.container > *:nth-child(2) { animation-delay: 0.3s; }
+.container > *:nth-child(3) { animation-delay: 0.5s; }
+@media (max-width: 768px) {
+  .buttons-grid { grid-template-columns: 1fr; gap: 30px; }
+  .size-btn { padding: 35px 25px; }
+  .impressum-btn { position: static; margin-top: 40px; display: inline-block; }
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <!-- Kunstwerk Bild -->
+    <img src="https://tempfile.aiquickdraw.com/h/f4abe345624284bccd9f81319c25d80b_1766851811.png" alt="Cosmic Sanctuary" class="art-image">
+    
+    <!-- Titel -->
+    <h1 class="title">Cosmic Sanctuary</h1>
+    
+    <!-- Beschreibung -->
+    <p class="description">Plunge into the depths of a cosmic sanctuary 🌌✨. This ultra-detailed, epic fantasy illustration portrays nothing but ancient reverence 🙇‍♀️. Realized intricately with 170 gsm (65 lb) semi-glossy finish 😇. The scene dazzles with high-contrast celestial lighting ☀️, and divine glow, all framed elegantly in durable, black pinewood 🖼️. Walk into frames of rolling hills, fantasy trees 🌳 and distant layered planets - all summoning a mythical, awe-inspiring aura 🌠. This piece was created to transcend your senses beyond the known reality, into the seemingly infinite cosmic blues and emerald greens. It's more than a picture, it's a celestial journey!</p>
+    
+    <!-- Premium Größen-Auswahl -->
+    <div class="buttons-grid">
+      <!-- A1 Premium -->
+      <a href="https://checkout.stripe.com/c/pay/cs_live_b16ZGS44suVViBOD33cjwhmZfuXxm0HX4zfjXTBka9usPl7Y3exZcgyP9L#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blppbHNgWjA0VmJkfXNBdDNkXUFwNHJiPVJpbnZ9Y0ptQ2RLTGpyM1B1TXc9QkB9fEdyQ3VLd3VIcDBDU3w0XXJhV2ZSTGQxSDx1U3RAdnZPRD1PRHxja2FUXERRZGJdNTVIQ38ySWxwUScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl" target="_blank" class="size-btn btn-a1">
+        <div class="size-format">📏 A1</div>
+        <div class="size-price">79,99€</div>
+        <div class="size-dimensions">84.1 × 59.4 cm</div>
+        <div class="size-specs">170gsm semi-glossy<br/>Schwarzer Holzrahmen</div>
+      </a>
+      
+      <!-- A2 Premium -->
+      <a href="https://checkout.stripe.com/c/pay/cs_live_b16DwiYZMZ84KtXfSYRugk2fKkURWM6OJr2bIBVh6vxA1BitgZWmF6otNu#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blppbHNgWjA0VmJkfXNBdDNkXUFwNHJiPVJpbnZ9Y0ptQ2RLTGpyM1B1TXc9QkB9fEdyQ3VLd3VIcDBDU3w0XXJhV2ZSTGQxSDx1U3RAdnZPRD1PRHxja2FUXERRZGJdNTVIQ38ySWxwUScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl" target="_blank" class="size-btn btn-a2">
+        <div class="size-format">📏 A2</div>
+        <div class="size-price">64,99€</div>
+        <div class="size-dimensions">59.4 × 42 cm</div>
+        <div class="size-specs">170gsm semi-glossy<br/>Schwarzer Holzrahmen</div>
+      </a>
+      
+      <!-- A3 Premium -->
+      <a href="https://checkout.stripe.com/c/pay/cs_live_b1ZG5cspEENyfEdIB8EVnxxt6E0ok7zFkO8NPlWIrgAXb2viISdkBLLny3#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blppbHNgWjA0VmJkfXNBdDNkXUFwNHJiPVJpbnZ9Y0ptQ2RLTGpyM1B1TXc9QkB9fEdyQ3VLd3VIcDBDU3w0XXJhV2ZSTGQxSDx1U3RAdnZPRD1PRHxja2FUXERRZGJdNTVIQ38ySWxwUScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl" target="_blank" class="size-btn btn-a3">
+        <div class="size-format">📏 A3</div>
+        <div class="size-price">39,99€</div>
+        <div class="size-dimensions">42 × 29.7 cm</div>
+        <div class="size-specs">170gsm semi-glossy<br/>Schwarzer Holzrahmen</div>
+      </a>
+    </div>
+  </div>
+  
+  <!-- Fixed Impressum Button -->
+  <a href="#impressum" class="impressum-btn">ℹ️ Impressum</a>
+  
+  <!-- Impressum Modal (klickbar) -->
+  <div id="impressum" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:9999;justify-content:center;align-items:center;font-family:'Inter',sans-serif;padding:40px;">
+    <div style="max-width:600px;background:rgba(255,255,255,0.05);backdrop-filter:blur(30px);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:50px;text-align:center;">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;margin-bottom:20px;color:#f8f9fa;">Impressum</h2>
+      <p style="color:#b8bcc8;line-height:1.6;font-size:1.1rem;">
+        <strong>KI Kunstwerk Studio</strong><br>
+        Stendal, Sachsen-Anhalt<br>
+        Deutschland<br><br>
+        <strong>Kontakt:</strong> hello@kikunstwerk.de<br><br>
+        USt-IdNr.: DE999999999<br>
+        Geschäftsführer: Max Mustermann
+      </p>
+      <button onclick="document.getElementById('impressum').style.display='none'" 
+              style="margin-top:30px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.3);border-radius:16px;padding:12px 28px;color:white;font-weight:500;cursor:pointer;transition:all 0.3s;">
+        Schließen
+      </button>
+    </div>
+  </div>
+  
+  <script>
+    document.querySelector('.impressum-btn').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('impressum').style.display = 'flex';
+    });
+  </script>
+</body>
+</html>
