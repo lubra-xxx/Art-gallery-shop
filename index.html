@@ -3,25 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Art Gallery</title>
+  <title>Art Gallery — Curated Wall Prints</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#0a0e1a;
-      --card-bg: linear-gradient(145deg, rgba(15,23,42,0.95), rgba(10,14,26,0.98));
-      --muted:#a1a1aa;
-      --accent1:#00d4aa;
-      --accent2:#00b4d8;
-      --glass: rgba(255,255,255,0.04);
-      --card-radius:16px;
+      --bg-1: #060816;
+      --bg-2: #0e1526;
+      --card-grad: linear-gradient(145deg, rgba(18,24,38,0.95), rgba(12,16,28,0.98));
+      --muted: #aeb3bd;
+      --accent1: #f5bf4a; /* warm gold */
+      --accent2: #f7d77b;
+      --teal: #00d4aa;
+      --glass: rgba(255,255,255,0.03);
+      --card-radius: 16px;
+      --shadow-1: 0 12px 36px rgba(0,0,0,0.65);
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;
-      background:var(--bg);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
       color:#eef2f7;
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
@@ -31,66 +34,78 @@
 
     header{
       text-align:center;
-      padding:32px 16px;
-      background:linear-gradient(135deg,#071022 0%, #11162a 100%);
-      border-bottom:1px solid rgba(255,255,255,0.04);
+      padding:28px 16px 20px;
+      border-bottom:1px solid rgba(255,255,255,0.03);
+      position:relative;
     }
     header h1{
       margin:0;
-      font-size:clamp(1.6rem,6vw,2.6rem);
       font-weight:700;
-      background: linear-gradient(135deg,var(--accent1),var(--accent2));
+      /* smaller min-size to avoid overlapping on very small screens */
+      font-size: clamp(1.4rem, 6vw, 2.2rem);
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--teal), #6ad0ff);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       background-clip:text;
       color:transparent;
     }
-    header p{
-      margin-top:8px;
+    header p.lead{
+      margin:8px 0 10px;
       color:var(--muted);
       font-weight:300;
-      font-size:clamp(0.9rem,3.2vw,1.05rem);
+      font-size: clamp(0.85rem, 3.6vw, 1rem);
+    }
+    header p.description{
+      margin: 8px auto 0;
+      max-width:900px;
+      color:#cbd5dd;
+      font-size: clamp(0.78rem, 3.2vw, 0.95rem);
+      line-height:1.45;
+      padding: 8px 12px;
+      opacity:0.95;
     }
 
     .container{
       max-width:1200px;
       margin:0 auto;
-      padding:24px 12px;
+      padding:20px 12px;
     }
 
-    /* Grid: immer 3 Spalten (auch auf Handy) */
+    /* Grid: always 3 columns */
     .products-grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap:14px;
+      gap:16px;
       align-items:start;
+      margin-top:8px;
     }
 
     .product{
-      background:var(--card-bg);
+      background: var(--card-grad);
       border-radius: var(--card-radius);
       padding:14px;
       position:relative;
       overflow:visible;
-      border:1px solid rgba(255,255,255,0.04);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: var(--shadow-1);
       transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
       display:flex;
       flex-direction:column;
       gap:10px;
     }
     .product:hover{
-      transform:translateY(-6px);
-      box-shadow: 0 26px 70px rgba(0,0,0,0.8);
-      border-color: rgba(0,212,170,0.12);
+      transform: translateY(-6px);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.82);
+      border-color: rgba(245,191,74,0.08);
     }
 
-    /* Bild-Wrapper sorgt für sauberen 9:16 Container (die Höhe wird per JS exakt gesetzt) */
+    /* Image wrapper ensures full image visible (contain) and exact 9:16 ratio via JS */
     .img-wrap{
       width:100%;
       border-radius:12px;
       overflow:hidden;
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.04));
       display:flex;
       align-items:center;
       justify-content:center;
@@ -100,12 +115,12 @@
     .img-wrap img{
       width:100%;
       height:100%;
-      object-fit: contain; /* zeigt das ganze Bild ohne Beschnitt */
+      object-fit: contain;
       display:block;
       background:transparent;
     }
 
-    .imprint-button{
+    .imprint-button-top{
       position:absolute;
       right:12px;
       top:12px;
@@ -122,18 +137,18 @@
       gap:8px;
       align-items:center;
     }
-    .imprint-button:hover{
-      color:var(--accent1);
-      border-color:var(--accent1);
-      background: rgba(0,212,170,0.08);
+    .imprint-button-top:hover{
+      color:var(--teal);
+      border-color:var(--teal);
+      background: rgba(0,212,170,0.06);
     }
 
     .title{
-      font-size:clamp(0.92rem,2.6vw,1.06rem);
+      font-size: clamp(0.92rem, 2.6vw, 1.04rem);
       font-weight:600;
       color:#f8fafc;
       text-align:center;
-      line-height:1.25;
+      line-height:1.22;
       display:-webkit-box;
       -webkit-line-clamp:2;
       -webkit-box-orient:vertical;
@@ -155,7 +170,7 @@
       user-select:none;
       text-align:center;
     }
-    .toggle:hover{ color:var(--accent1); transform:translateY(-2px) }
+    .toggle:hover{ color:var(--teal); transform:translateY(-2px) }
 
     .description{
       display:none;
@@ -168,161 +183,133 @@
       border:1px solid rgba(255,255,255,0.03);
     }
 
+    /* Impressum link below description */
+    .imprint-small{
+      display:block;
+      margin:8px auto 0;
+      font-size:0.78rem;
+      color:var(--muted);
+      text-decoration:none;
+      padding:6px 10px;
+      border-radius:10px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.02);
+      transition: all .14s ease;
+      width:fit-content;
+    }
+    .imprint-small:hover{
+      color:var(--teal);
+      border-color:var(--teal);
+      background: rgba(0,212,170,0.04);
+    }
+
     .buttons-row{
       display:flex;
-      gap:8px;
+      gap:10px;
       justify-content:center;
-      margin-top:4px;
+      margin-top:6px;
     }
+
+    /* Aesthetischere Kauf-Buttons */
     .buy-button{
       flex:1;
       min-width:0;
       text-decoration:none;
-      border-radius:10px;
-      padding:10px 6px;
+      border-radius:12px;
+      padding:10px 8px;
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
       gap:4px;
-      color:#0f172a;
+      color:#071022;
       font-weight:700;
-      background:linear-gradient(135deg,#facc15,#fbbf24);
-      box-shadow: 0 6px 18px rgba(250,204,21,0.32);
+      background: linear-gradient(180deg, rgba(255,244,224,1), rgba(247,215,120,1));
+      box-shadow: 0 6px 18px rgba(247,209,110,0.22), inset 0 -2px 6px rgba(0,0,0,0.06);
       text-align:center;
       transition: transform .14s ease, box-shadow .14s ease;
-      min-height:62px;
+      min-height:64px;
+      border: 1px solid rgba(0,0,0,0.06);
     }
-    .buy-button:hover:not([aria-disabled="true"]){ transform:translateY(-2px); box-shadow: 0 10px 28px rgba(250,204,21,0.5) }
-    .buy-button[aria-disabled="true"]{ opacity:0.5; pointer-events:none; }
+    .buy-button .price{
+      font-size:0.98rem;
+      letter-spacing: -0.01em;
+    }
+    .buy-button .size{
+      font-size:0.78rem;
+      font-weight:600;
+      opacity:0.95;
+    }
+    .buy-button:hover:not([aria-disabled="true"]){
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(247,209,110,0.28), inset 0 -2px 8px rgba(0,0,0,0.06);
+    }
+    .buy-button[aria-disabled="true"]{ opacity:0.46; pointer-events:none; filter:grayscale(1) brightness(.95) }
 
-    .buy-button strong{ font-size:0.92rem; display:block; color:#071022 }
-    .buy-button span{ font-size:0.78rem; opacity:0.95; color:#071022; font-weight:600 }
+    a:focus, button:focus, .toggle:focus { outline: 3px solid rgba(0,212,170,0.14); outline-offset:3px; border-radius:8px; }
 
-    /* Kleine Geräte: etwas engere Abstände, trotzdem 3 Spalten */
+    /* Mobile: reduce paddings and gaps BUT keep 3 columns */
     @media (max-width: 480px){
-      .container{ padding:16px 8px }
-      .products-grid{ gap:8px }
+      .container{ padding:14px 8px }
+      .products-grid{ gap:10px }
       .product{ padding:10px }
-      .imprint-button{ right:10px; top:10px; padding:5px 6px; font-size:0.82rem }
-      .title{ font-size:0.92rem }
-      .buy-button{ min-height:56px; padding:8px 6px }
+      .imprint-button-top{ right:10px; top:10px; padding:5px 6px; font-size:0.82rem }
+      .title{ font-size:0.9rem }
+      .buy-button{ min-height:58px; padding:8px 6px; border-radius:10px }
+      header p.description{ padding:6px 10px; font-size:0.88rem; }
     }
 
-    /* Sehr kleine Geräte: reduziere Abstände, halte aber 3 Spalten */
-    @media (max-width:360px){
-      .products-grid{ gap:6px }
+    @media (max-width: 360px){
+      .products-grid{ gap:8px }
       .product{ padding:8px }
-      .title{ font-size:0.88rem }
-      .buy-button strong{ font-size:0.86rem }
+      .title{ font-size:0.86rem }
+      .buy-button .price{ font-size:0.9rem }
+      .buy-button .size{ font-size:0.74rem }
     }
-
-    /* Accessibility focus */
-    a:focus, button:focus, .toggle:focus { outline: 3px solid rgba(0,212,170,0.18); outline-offset:3px; }
   </style>
 </head>
 <body>
   <header>
     <h1>Art Gallery</h1>
-    <p>Daily New Artworks — Professionell & responsiv</p>
+    <p class="lead">Daily New Artworks</p>
+    <p class="description">
+      A curated collection of fine art wall prints, designed to elevate modern living spaces. Each piece is crafted for visual balance, high-quality printing, and timeless aesthetics — transforming rooms into refined, atmospheric environments.
+    </p>
   </header>
 
   <div class="container">
     <div class="products-grid" id="productList" aria-live="polite">
-      <!-- Produkte werden per JS eingefügt -->
+      <!-- Produkte werden per JS generiert -->
     </div>
   </div>
 
   <script>
-    // Hilfsfunktion: debounce
+    // debounce
     function debounce(fn, wait){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); } }
 
-    // Setze die Bild-Wrapper-Höhen so, dass exakt 9:16 Verhältnis (Breite * 16/9) erreicht wird.
+    // Passt Bild-Wrapper-Höhen für exaktes 9:16 Verhältnis (H = W * 16/9)
     function adjustImageHeights(){
       document.querySelectorAll('.product .img-wrap').forEach(el=>{
-        // Breite des Produkts (content box)
-        const productWidth = el.clientWidth || el.getBoundingClientRect().width;
-        // Höhe für 9:16 -> width * 16/9
-        const neededHeight = Math.round(productWidth * (16/9));
-        el.style.height = neededHeight + 'px';
+        const w = el.clientWidth || el.getBoundingClientRect().width;
+        const h = Math.round(w * (16/9));
+        el.style.height = h + 'px';
       });
     }
 
-    // Toggle Beschreibung (text + Pfeil)
+    // Toggle Beschreibung und Button-Label
     function toggleDesc(id, btn){
       const el = document.getElementById(id);
       if(!el) return;
-      const shown = el.style.display === 'block';
-      el.style.display = shown ? 'none' : 'block';
+      const isShown = el.style.display === 'block';
+      el.style.display = isShown ? 'none' : 'block';
       if(btn){
-        btn.textContent = shown ? 'show description ▼' : 'hide description ▲';
+        btn.setAttribute('aria-expanded', !isShown);
+        btn.textContent = isShown ? 'show description ▼' : 'hide description ▲';
       }
-      // nach anzeigen neu anpassen (falls scrollbar)
       setTimeout(adjustImageHeights, 80);
     }
 
-    // Produkte laden
-    fetch('products.json')
-      .then(r => {
-        if(!r.ok) throw new Error('products.json konnte nicht geladen werden');
-        return r.json();
-      })
-      .then(data => {
-        const list = document.getElementById('productList');
-
-        // Sortiere neueste zuerst
-        const sortedProducts = (data.products || []).slice().sort((a,b) => new Date(b.created || 0) - new Date(a.created || 0));
-
-        // Maximum z.B. 18 Produkte wie vorher
-        sortedProducts.slice(0, 18).forEach((p, idx) => {
-          const unique = Date.now().toString(36) + '-' + idx;
-          const descId = 'desc-' + unique;
-
-          const d = document.createElement('article');
-          d.className = 'product';
-          d.setAttribute('role','article');
-          d.innerHTML = `
-            <a class="imprint-button" href="${escapeHtml(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Bild in neuem Tab öffnen">🖼️ Ansicht</a>
-            <div class="img-wrap" aria-hidden="false">
-              <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title || 'Artwork')}" loading="lazy">
-            </div>
-            <div class="title">${escapeHtml(p.title || 'Untitled')}</div>
-            <div style="text-align:center;">
-              <button type="button" class="toggle" onclick="toggleDesc('${descId}', this)" aria-expanded="false">show description ▼</button>
-            </div>
-            <div class="description" id="${descId}">
-              ${escapeHtml(p.description || 'Keine Beschreibung verfügbar.')}
-            </div>
-            <div class="buttons-row" aria-hidden="false">
-              <a class="buy-button" href="${escapeHtml(p.payments?.A1 || '#')}" target="_blank" rel="noopener noreferrer" ${p.payments?.A1 ? '' : 'aria-disabled="true"'} title="A1 kaufen">
-                <strong>A1 79,99€</strong><span>84×59cm</span>
-              </a>
-              <a class="buy-button" href="${escapeHtml(p.payments?.A2 || '#')}" target="_blank" rel="noopener noreferrer" ${p.payments?.A2 ? '' : 'aria-disabled="true"'} title="A2 kaufen">
-                <strong>A2 64,99€</strong><span>59×42cm</span>
-              </a>
-              <a class="buy-button" href="${escapeHtml(p.payments?.A3 || '#')}" target="_blank" rel="noopener noreferrer" ${p.payments?.A3 ? '' : 'aria-disabled="true"'} title="A3 kaufen">
-                <strong>A3 39,99€</strong><span>42×30cm</span>
-              </a>
-            </div>
-          `;
-          list.appendChild(d);
-        });
-
-        // einmal anpassen, nachdem DOM aufgebaut
-        setTimeout(adjustImageHeights, 60);
-      })
-      .catch(err => {
-        console.error('Fehler beim Laden:', err);
-        const list = document.getElementById('productList');
-        list.innerHTML = '<div style="grid-column:1/-1;color:var(--muted);text-align:center;padding:24px">Fehler beim Laden der Produkte. Bitte prüfe die Datei products.json.</div>';
-      });
-
-    // Resize: Bildhöhen anpassen (debounced)
-    window.addEventListener('resize', debounce(adjustImageHeights, 120));
-    // Wenn Schriftarten geladen/angepasst sind
-    window.addEventListener('load', () => setTimeout(adjustImageHeights, 80));
-
-    // Leichte HTML-escaping Funktion für Inhalte aus products.json (vermeidet XSS bei ungefilterten Daten)
+    // Safestring to avoid XSS
     function escapeHtml(str){
       if(str === null || str === undefined) return '';
       return String(str)
@@ -332,6 +319,69 @@
         .replaceAll('"','&quot;')
         .replaceAll("'",'&#39;');
     }
+
+    // Lade Produkte
+    fetch('products.json')
+      .then(r => {
+        if(!r.ok) throw new Error('products.json konnte nicht geladen werden');
+        return r.json();
+      })
+      .then(data => {
+        const list = document.getElementById('productList');
+        const items = (data.products || []).slice().sort((a,b) => new Date(b.created || 0) - new Date(a.created || 0));
+        items.slice(0, 18).forEach((p, idx) => {
+          const id = 'desc-' + (Date.now().toString(36) + '-' + idx);
+          const d = document.createElement('article');
+          d.className = 'product';
+          d.setAttribute('role','article');
+          const imprintUrl = escapeHtml(p.imprint || p.imprintUrl || '#');
+          d.innerHTML = `
+            <a class="imprint-button-top" href="${escapeHtml(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Bild in neuem Tab öffnen">🖼️ Ansicht</a>
+
+            <div class="img-wrap" aria-hidden="false">
+              <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title || 'Artwork')}" loading="lazy">
+            </div>
+
+            <div class="title">${escapeHtml(p.title || 'Untitled')}</div>
+
+            <div style="text-align:center;">
+              <button type="button" class="toggle" onclick="toggleDesc('${id}', this)" aria-expanded="false">show description ▼</button>
+            </div>
+
+            <div class="description" id="${id}">
+              ${escapeHtml(p.description || 'Keine Beschreibung verfügbar.')}
+              <a class="imprint-small" href="${imprintUrl}" target="_blank" rel="noopener noreferrer">Impressum</a>
+            </div>
+
+            <div class="buttons-row" aria-hidden="false">
+              <a class="buy-button" href="${escapeHtml(p.payments?.A1 || '#')}" target="_blank" rel="noopener noreferrer" ${p.payments?.A1 ? '' : 'aria-disabled="true"'} title="A1 kaufen">
+                <span class="price">79,99 €</span>
+                <span class="size">A1 — 84×59 cm</span>
+              </a>
+              <a class="buy-button" href="${escapeHtml(p.payments?.A2 || '#')}" target="_blank" rel="noopener noreferrer" ${p.payments?.A2 ? '' : 'aria-disabled="true"'} title="A2 kaufen">
+                <span class="price">64,99 €</span>
+                <span class="size">A2 — 59×42 cm</span>
+              </a>
+              <a class="buy-button" href="${escapeHtml(p.payments?.A3 || '#')}" target="_blank" rel="noopener noreferrer" ${p.payments?.A3 ? '' : 'aria-disabled="true"'} title="A3 kaufen">
+                <span class="price">39,99 €</span>
+                <span class="size">A3 — 42×30 cm</span>
+              </a>
+            </div>
+          `;
+          list.appendChild(d);
+        });
+
+        // adjust after DOM ready
+        setTimeout(adjustImageHeights, 60);
+      })
+      .catch(err => {
+        console.error('Fehler beim Laden:', err);
+        const list = document.getElementById('productList');
+        list.innerHTML = '<div style="grid-column:1/-1;color:var(--muted);text-align:center;padding:24px">Fehler beim Laden der Produkte. Bitte prüfe die Datei products.json.</div>';
+      });
+
+    window.addEventListener('resize', debounce(adjustImageHeights, 110));
+    window.addEventListener('load', () => setTimeout(adjustImageHeights, 80));
   </script>
 </body>
 </html>
