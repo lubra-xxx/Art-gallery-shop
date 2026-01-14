@@ -11,9 +11,10 @@
       --bg-2: #0e1526;
       --card-grad: linear-gradient(145deg, rgba(18,24,38,0.95), rgba(12,16,28,0.98));
       --muted: #aeb3bd;
-      --accent1: #f5bf4a; /* warm gold */
-      --accent2: #f7d77b;
-      --teal: #00d4aa;
+      --accent-teal: #00d4aa;
+      --accent-gold-strong: #f5bf4a; /* previous gold */
+      --accent-gold-muted-1: #efe2c7; /* new softer gold (buttons) */
+      --accent-gold-muted-2: #e6c88a;
       --glass: rgba(255,255,255,0.03);
       --card-radius: 16px;
       --shadow-1: 0 12px 36px rgba(0,0,0,0.65);
@@ -32,38 +33,63 @@
       padding-bottom:48px;
     }
 
+    /* Header */
     header{
       text-align:center;
-      padding:28px 16px 20px;
+      padding:18px 16px 18px;
       border-bottom:1px solid rgba(255,255,255,0.03);
       position:relative;
     }
+    /* Top-left imprint button in header */
+    .header-imprint {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      display: inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:6px 10px;
+      border-radius:10px;
+      background: rgba(15,23,42,0.75);
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.9rem;
+      transition: all .14s ease;
+    }
+    .header-imprint:hover {
+      color: var(--accent-teal);
+      border-color: var(--accent-teal);
+      background: rgba(0,212,170,0.06);
+    }
+
     header h1{
       margin:0;
       font-weight:700;
-      /* smaller min-size to avoid overlapping on very small screens */
-      font-size: clamp(1.4rem, 6vw, 2.2rem);
+      /* make header title responsive and avoid being too large on small screens */
+      font-size: clamp(1.1rem, 5.2vw, 1.9rem);
       letter-spacing: -0.02em;
-      background: linear-gradient(135deg, var(--teal), #6ad0ff);
+      background: linear-gradient(135deg, var(--accent-teal), #6ad0ff);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       background-clip:text;
       color:transparent;
     }
     header p.lead{
-      margin:8px 0 10px;
+      margin:8px 0 6px;
       color:var(--muted);
       font-weight:300;
-      font-size: clamp(0.85rem, 3.6vw, 1rem);
+      font-size: clamp(0.82rem, 3.4vw, 0.98rem);
     }
+    /* the site description under the name (the requested paragraph) */
     header p.description{
       margin: 8px auto 0;
-      max-width:900px;
+      max-width:980px;
       color:#cbd5dd;
-      font-size: clamp(0.78rem, 3.2vw, 0.95rem);
+      font-size: clamp(0.78rem, 3.0vw, 0.95rem);
       line-height:1.45;
       padding: 8px 12px;
-      opacity:0.95;
+      opacity:0.96;
     }
 
     .container{
@@ -138,8 +164,8 @@
       align-items:center;
     }
     .imprint-button-top:hover{
-      color:var(--teal);
-      border-color:var(--teal);
+      color:var(--accent-teal);
+      border-color:var(--accent-teal);
       background: rgba(0,212,170,0.06);
     }
 
@@ -170,7 +196,7 @@
       user-select:none;
       text-align:center;
     }
-    .toggle:hover{ color:var(--teal); transform:translateY(-2px) }
+    .toggle:hover{ color:var(--accent-teal); transform:translateY(-2px) }
 
     .description{
       display:none;
@@ -183,7 +209,7 @@
       border:1px solid rgba(255,255,255,0.03);
     }
 
-    /* Impressum link below description */
+    /* Impressum link below product description */
     .imprint-small{
       display:block;
       margin:8px auto 0;
@@ -198,64 +224,67 @@
       width:fit-content;
     }
     .imprint-small:hover{
-      color:var(--teal);
-      border-color:var(--teal);
+      color:var(--accent-teal);
+      border-color:var(--accent-teal);
       background: rgba(0,212,170,0.04);
     }
 
     .buttons-row{
       display:flex;
-      gap:10px;
+      gap:12px; /* slightly larger horizontal spacing for visual breathing room */
       justify-content:center;
       margin-top:6px;
     }
 
-    /* Aesthetischere Kauf-Buttons */
+    /* Aesthetischere Kauf-Buttons: etwas breiter, weniger hoch, softere Farbe */
     .buy-button{
-      flex:1;
+      /* make buttons a bit wider visually by allowing them to stretch and giving horizontal padding */
+      flex: 1 1 0;
       min-width:0;
       text-decoration:none;
       border-radius:12px;
-      padding:10px 8px;
+      padding:8px 14px; /* less height, more horizontal padding */
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      gap:4px;
+      gap:3px;
       color:#071022;
       font-weight:700;
-      background: linear-gradient(180deg, rgba(255,244,224,1), rgba(247,215,120,1));
-      box-shadow: 0 6px 18px rgba(247,209,110,0.22), inset 0 -2px 6px rgba(0,0,0,0.06);
+      /* softer gold / sand gradient */
+      background: linear-gradient(180deg, var(--accent-gold-muted-1), var(--accent-gold-muted-2));
+      box-shadow: 0 8px 20px rgba(230,200,130,0.12), inset 0 -2px 6px rgba(0,0,0,0.04);
       text-align:center;
       transition: transform .14s ease, box-shadow .14s ease;
-      min-height:64px;
+      min-height:50px; /* reduced height */
       border: 1px solid rgba(0,0,0,0.06);
     }
     .buy-button .price{
-      font-size:0.98rem;
+      font-size:0.95rem;
       letter-spacing: -0.01em;
     }
     .buy-button .size{
-      font-size:0.78rem;
+      font-size:0.74rem;
       font-weight:600;
       opacity:0.95;
     }
     .buy-button:hover:not([aria-disabled="true"]){
       transform: translateY(-3px);
-      box-shadow: 0 14px 36px rgba(247,209,110,0.28), inset 0 -2px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 18px 40px rgba(230,200,130,0.18), inset 0 -2px 8px rgba(0,0,0,0.06);
     }
     .buy-button[aria-disabled="true"]{ opacity:0.46; pointer-events:none; filter:grayscale(1) brightness(.95) }
 
     a:focus, button:focus, .toggle:focus { outline: 3px solid rgba(0,212,170,0.14); outline-offset:3px; border-radius:8px; }
 
-    /* Mobile: reduce paddings and gaps BUT keep 3 columns */
+    /* Mobile: reduce paddings and gaps BUT keep 3 columns, ensure header title doesn't overflow */
     @media (max-width: 480px){
       .container{ padding:14px 8px }
       .products-grid{ gap:10px }
       .product{ padding:10px }
+      .header-imprint { left: 8px; top: 8px; padding:5px 8px; font-size:0.82rem; }
       .imprint-button-top{ right:10px; top:10px; padding:5px 6px; font-size:0.82rem }
       .title{ font-size:0.9rem }
-      .buy-button{ min-height:58px; padding:8px 6px; border-radius:10px }
+      .buy-button{ min-height:46px; padding:7px 12px; border-radius:10px }
       header p.description{ padding:6px 10px; font-size:0.88rem; }
     }
 
@@ -264,14 +293,20 @@
       .product{ padding:8px }
       .title{ font-size:0.86rem }
       .buy-button .price{ font-size:0.9rem }
-      .buy-button .size{ font-size:0.74rem }
+      .buy-button .size{ font-size:0.72rem }
+      header h1{ font-size: clamp(1.0rem, 5.6vw, 1.7rem); }
     }
   </style>
 </head>
 <body>
   <header>
+    <!-- Top-left global Impressum button requested -->
+    <a href="impressum.html" class="header-imprint" target="_blank" rel="noopener noreferrer" aria-label="Impressum öffnen">Impressum</a>
+
     <h1>Art Gallery</h1>
     <p class="lead">Daily New Artworks</p>
+
+    <!-- The description under the name at the beginning of the page (user requested) -->
     <p class="description">
       A curated collection of fine art wall prints, designed to elevate modern living spaces. Each piece is crafted for visual balance, high-quality printing, and timeless aesthetics — transforming rooms into refined, atmospheric environments.
     </p>
@@ -334,7 +369,7 @@
           const d = document.createElement('article');
           d.className = 'product';
           d.setAttribute('role','article');
-          const imprintUrl = escapeHtml(p.imprint || p.imprintUrl || '#');
+          const imprintUrl = escapeHtml(p.imprint || p.imprintUrl || 'impressum.html');
           d.innerHTML = `
             <a class="imprint-button-top" href="${escapeHtml(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Bild in neuem Tab öffnen">🖼️ Ansicht</a>
 
