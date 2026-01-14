@@ -1,322 +1,337 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Art Gallery</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: #0a0e1a;
-    color: #f5f5f5;
-    line-height: 1.6;
-    padding-bottom: 40px;
-  }
-  header {
-    text-align: center;
-    padding: 32px 16px;
-    background: linear-gradient(135deg, #0a0e1a 0%, #1a1f3d 100%);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  header h1 {
-    margin: 0;
-    font-size: clamp(1.8rem, 8vw, 3rem);
-    font-weight: 700;
-    background: linear-gradient(135deg, #00d4aa, #00b4d8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  header p {
-    margin-top: 8px;
-    color: #a1a1aa;
-    font-size: clamp(0.9rem, 4vw, 1.1rem);
-    font-weight: 300;
-  }
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 24px 12px;
-  }
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-  .product {
-    background: linear-gradient(145deg, rgba(15,23,42,0.95), rgba(10,14,26,0.98));
-    border-radius: 18px;
-    padding: 20px 16px;
-    box-shadow: 0 16px 50px rgba(0,0,0,0.6);
-    border: 1px solid rgba(255,255,255,0.05);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-  .product:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 25px 70px rgba(0,0,0,0.8);
-    border-color: rgba(0,212,170,0.2);
-  }
-  .product img {
-    width: 100%;
-    /* EXAKT 9:16 für alle Produkte */
-    aspect-ratio: 9/16;
-    height: auto;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 14px;
-    margin-bottom: 14px;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.5);
-    display: block;
-  }
-  .title {
-    font-size: clamp(0.95rem, 3.5vw, 1.1rem);
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 10px;
-    color: #f8fafc;
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .toggle {
-    font-size: clamp(0.7rem, 2.5vw, 0.8rem);
-    color: #a1a1aa;
-    cursor: pointer;
-    text-align: center;
-    margin-bottom: 14px;
-    padding: 5px 10px;
-    border-radius: 16px;
-    background: rgba(255,255,255,0.08);
-    display: inline-block;
-    border: 1px solid rgba(255,255,255,0.08);
-    transition: all 0.2s ease;
-  }
-  .toggle:hover {
-    background: rgba(255,255,255,0.15);
-    color: #00d4aa;
-  }
-  .description {
-    display: none;
-    font-size: clamp(0.75rem, 2.8vw, 0.85rem);
-    color: #d4d4d8;
-    text-align: center;
-    margin-bottom: 16px;
-    padding: 10px;
-    line-height: 1.4;
-    background: rgba(255,255,255,0.02);
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.03);
-  }
-  .buttons-row {
-    display: flex;
-    gap: 6px;
-    justify-content: center;
-    margin-bottom: 12px;
-  }
-  .buy-button {
-    flex: 1;
-    padding: 10px 6px;
-    border-radius: 10px;
-    text-decoration: none;
-    color: #0f172a;
-    font-size: clamp(0.72rem, 2.6vw, 0.82rem);
-    font-weight: 600;
-    text-align: center;
-    background: linear-gradient(135deg, #facc15, #fbbf24);
-    box-shadow: 0 6px 20px rgba(250,204,21,0.4);
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 60px;
-  }
-  .buy-button:hover:not([style*="opacity:0.5"]) {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(250,204,21,0.6);
-  }
-  .buy-button strong {
-    font-size: clamp(0.8rem, 3vw, 0.88rem);
-    display: block;
-  }
-  .buy-button span {
-    font-size: clamp(0.68rem, 2.4vw, 0.75rem);
-    opacity: 0.9;
-    font-weight: 500;
-  }
-  .imprint-button {
-    position: absolute;
-    right: 12px;
-    top: 12px;
-    font-size: 0.85rem;
-    padding: 4px 8px;
-    border-radius: 10px;
-    border: 1px solid rgba(161,161,170,0.3);
-    color: #a1a1aa;
-    background: rgba(15,23,42,0.9);
-    text-decoration: none;
-    transition: all 0.2s ease;
-    font-weight: 500;
-    line-height: 1;
-  }
-  .imprint-button:hover {
-    color: #00d4aa;
-    border-color: #00d4aa;
-    background: rgba(0,212,170,0.15);
-  }
-
-  /* HANDY OPTIMIERUNG - 3 SPALTEN BEIBEHALTEN */
-  @media (max-width: 768px) {
-    .container {
-      padding: 20px 8px;
-      max-width: 100%;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Art Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0a0e1a;
+      --card-bg: linear-gradient(145deg, rgba(15,23,42,0.95), rgba(10,14,26,0.98));
+      --muted:#a1a1aa;
+      --accent1:#00d4aa;
+      --accent2:#00b4d8;
+      --glass: rgba(255,255,255,0.04);
+      --card-radius:16px;
     }
-    .products-grid {
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;
+      background:var(--bg);
+      color:#eef2f7;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding-bottom:48px;
+    }
+
+    header{
+      text-align:center;
+      padding:32px 16px;
+      background:linear-gradient(135deg,#071022 0%, #11162a 100%);
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+    header h1{
+      margin:0;
+      font-size:clamp(1.6rem,6vw,2.6rem);
+      font-weight:700;
+      background: linear-gradient(135deg,var(--accent1),var(--accent2));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      color:transparent;
+    }
+    header p{
+      margin-top:8px;
+      color:var(--muted);
+      font-weight:300;
+      font-size:clamp(0.9rem,3.2vw,1.05rem);
+    }
+
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+      padding:24px 12px;
+    }
+
+    /* Grid: immer 3 Spalten (auch auf Handy) */
+    .products-grid{
+      display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap:14px;
+      align-items:start;
     }
-    .product {
-      padding: 16px 12px;
-    }
-    .product img {
-      aspect-ratio: 9/16;
-      min-height: 120px;
-      border-radius: 12px;
-      margin-bottom: 12px;
-    }
-    .title {
-      font-size: 0.92rem;
-      margin-bottom: 8px;
-    }
-    .toggle {
-      font-size: 0.72rem;
-      padding: 4px 8px;
-      margin-bottom: 12px;
-    }
-    .buttons-row {
-      gap: 4px;
-      margin-bottom: 8px;
-    }
-    .buy-button {
-      min-height: 56px;
-      padding: 8px 4px;
-    }
-    .buy-button strong {
-      font-size: 0.82rem;
-    }
-    .buy-button span {
-      font-size: 0.7rem;
-    }
-    .imprint-button {
-      font-size: 0.8rem;
-      padding: 3px 6px;
-      right: 10px;
-      top: 10px;
-    }
-  }
 
-  @media (max-width: 480px) {
-    .products-grid {
-      gap: 10px;
+    .product{
+      background:var(--card-bg);
+      border-radius: var(--card-radius);
+      padding:14px;
+      position:relative;
+      overflow:visible;
+      border:1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
     }
-    .product {
-      padding: 14px 10px;
+    .product:hover{
+      transform:translateY(-6px);
+      box-shadow: 0 26px 70px rgba(0,0,0,0.8);
+      border-color: rgba(0,212,170,0.12);
     }
-    .product img {
-      min-height: 110px;
-      border-radius: 10px;
-    }
-    .buy-button {
-      min-height: 52px;
-    }
-    .buy-button strong {
-      font-size: 0.78rem;
-    }
-    .buy-button span {
-      font-size: 0.68rem;
-    }
-  }
 
-  @media (max-width: 360px) {
-    .products-grid {
-      gap: 8px;
+    /* Bild-Wrapper sorgt für sauberen 9:16 Container (die Höhe wird per JS exakt gesetzt) */
+    .img-wrap{
+      width:100%;
+      border-radius:12px;
+      overflow:hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.04));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      flex: 0 0 auto;
     }
-    .product {
-      padding: 12px 8px;
+    .img-wrap img{
+      width:100%;
+      height:100%;
+      object-fit: contain; /* zeigt das ganze Bild ohne Beschnitt */
+      display:block;
+      background:transparent;
     }
-    .product img {
-      min-height: 100px;
+
+    .imprint-button{
+      position:absolute;
+      right:12px;
+      top:12px;
+      font-size:0.9rem;
+      padding:6px 8px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--muted);
+      background: rgba(15,23,42,0.85);
+      text-decoration:none;
+      transition:all .18s ease;
+      z-index:3;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
     }
-  }
-</style>
+    .imprint-button:hover{
+      color:var(--accent1);
+      border-color:var(--accent1);
+      background: rgba(0,212,170,0.08);
+    }
+
+    .title{
+      font-size:clamp(0.92rem,2.6vw,1.06rem);
+      font-weight:600;
+      color:#f8fafc;
+      text-align:center;
+      line-height:1.25;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+      padding:0 6px;
+    }
+
+    .toggle{
+      display:inline-block;
+      margin:0 auto;
+      cursor:pointer;
+      color:var(--muted);
+      font-size:0.86rem;
+      padding:6px 10px;
+      border-radius:14px;
+      background:var(--glass);
+      border:1px solid rgba(255,255,255,0.04);
+      transition:all .15s ease;
+      user-select:none;
+      text-align:center;
+    }
+    .toggle:hover{ color:var(--accent1); transform:translateY(-2px) }
+
+    .description{
+      display:none;
+      font-size:0.86rem;
+      color:#cfd6dc;
+      text-align:center;
+      padding:10px;
+      border-radius:10px;
+      background: rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    .buttons-row{
+      display:flex;
+      gap:8px;
+      justify-content:center;
+      margin-top:4px;
+    }
+    .buy-button{
+      flex:1;
+      min-width:0;
+      text-decoration:none;
+      border-radius:10px;
+      padding:10px 6px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:4px;
+      color:#0f172a;
+      font-weight:700;
+      background:linear-gradient(135deg,#facc15,#fbbf24);
+      box-shadow: 0 6px 18px rgba(250,204,21,0.32);
+      text-align:center;
+      transition: transform .14s ease, box-shadow .14s ease;
+      min-height:62px;
+    }
+    .buy-button:hover:not([aria-disabled="true"]){ transform:translateY(-2px); box-shadow: 0 10px 28px rgba(250,204,21,0.5) }
+    .buy-button[aria-disabled="true"]{ opacity:0.5; pointer-events:none; }
+
+    .buy-button strong{ font-size:0.92rem; display:block; color:#071022 }
+    .buy-button span{ font-size:0.78rem; opacity:0.95; color:#071022; font-weight:600 }
+
+    /* Kleine Geräte: etwas engere Abstände, trotzdem 3 Spalten */
+    @media (max-width: 480px){
+      .container{ padding:16px 8px }
+      .products-grid{ gap:8px }
+      .product{ padding:10px }
+      .imprint-button{ right:10px; top:10px; padding:5px 6px; font-size:0.82rem }
+      .title{ font-size:0.92rem }
+      .buy-button{ min-height:56px; padding:8px 6px }
+    }
+
+    /* Sehr kleine Geräte: reduziere Abstände, halte aber 3 Spalten */
+    @media (max-width:360px){
+      .products-grid{ gap:6px }
+      .product{ padding:8px }
+      .title{ font-size:0.88rem }
+      .buy-button strong{ font-size:0.86rem }
+    }
+
+    /* Accessibility focus */
+    a:focus, button:focus, .toggle:focus { outline: 3px solid rgba(0,212,170,0.18); outline-offset:3px; }
+  </style>
 </head>
 <body>
-<header>
-  <h1>Art Gallery</h1>
-  <p>Daily New Artworks</p>
-</header>
+  <header>
+    <h1>Art Gallery</h1>
+    <p>Daily New Artworks — Professionell & responsiv</p>
+  </header>
 
-<div class="container">
-  <div class="products-grid" id="productList">
-    <!-- Produkte kommen hier rein -->
+  <div class="container">
+    <div class="products-grid" id="productList" aria-live="polite">
+      <!-- Produkte werden per JS eingefügt -->
+    </div>
   </div>
-</div>
 
-<script>
-fetch("products.json")
-  .then(r => r.json())
-  .then(data => {
-    const list = document.getElementById("productList");
-    
-    // Sortiere neueste zuerst
-    const sortedProducts = data.products.sort((a,b) => new Date(b.created || 0) - new Date(a.created || 0));
-    
-    sortedProducts.slice(0, 18).forEach((p, i) => {
-      const d = document.createElement("div");
-      d.className = "product";
-      d.innerHTML = `
-        <a href="${p.image}" target="_blank" class="imprint-button">🖼️</a>
-        <img src="${p.image}" alt="${p.title}" loading="lazy">
-        <div class="title">${p.title}</div>
-        <div class="toggle" onclick="toggleDesc(${i})">show description ▼</div>
-        <div class="description" id="desc-${i}">
-          ${p.description || 'Keine Beschreibung verfügbar.'}
-        </div>
-        
-        <div class="buttons-row">
-          <a href="${p.payments?.A1 || '#'}" target="_blank" class="buy-button" ${!p.payments?.A1 ? 'style="opacity:0.5;pointer-events:none;"' : ''}>
-            <strong>A1 79,99€</strong>
-            <span>84×59cm</span>
-          </a>
-          <a href="${p.payments?.A2 || '#'}" target="_blank" class="buy-button" ${!p.payments?.A2 ? 'style="opacity:0.5;pointer-events:none;"' : ''}>
-            <strong>A2 64,99€</strong>
-            <span>59×42cm</span>
-          </a>
-          <a href="${p.payments?.A3 || '#'}" target="_blank" class="buy-button" ${!p.payments?.A3 ? 'style="opacity:0.5;pointer-events:none;"' : ''}>
-            <strong>A3 39,99€</strong>
-            <span>42×30cm</span>
-          </a>
-        </div>
-      `;
-      list.appendChild(d);
-    });
-  })
-  .catch(err => console.error('Fehler beim Laden:', err));
+  <script>
+    // Hilfsfunktion: debounce
+    function debounce(fn, wait){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); } }
 
-let descCounters = {};
-function toggleDesc(i) {
-  const el = document.getElementById("desc-" + i);
-  if (el) {
-    el.style.display = el.style.display === "block" ? "none" : "block";
-  }
-}
-</script>
+    // Setze die Bild-Wrapper-Höhen so, dass exakt 9:16 Verhältnis (Breite * 16/9) erreicht wird.
+    function adjustImageHeights(){
+      document.querySelectorAll('.product .img-wrap').forEach(el=>{
+        // Breite des Produkts (content box)
+        const productWidth = el.clientWidth || el.getBoundingClientRect().width;
+        // Höhe für 9:16 -> width * 16/9
+        const neededHeight = Math.round(productWidth * (16/9));
+        el.style.height = neededHeight + 'px';
+      });
+    }
+
+    // Toggle Beschreibung (text + Pfeil)
+    function toggleDesc(id, btn){
+      const el = document.getElementById(id);
+      if(!el) return;
+      const shown = el.style.display === 'block';
+      el.style.display = shown ? 'none' : 'block';
+      if(btn){
+        btn.textContent = shown ? 'show description ▼' : 'hide description ▲';
+      }
+      // nach anzeigen neu anpassen (falls scrollbar)
+      setTimeout(adjustImageHeights, 80);
+    }
+
+    // Produkte laden
+    fetch('products.json')
+      .then(r => {
+        if(!r.ok) throw new Error('products.json konnte nicht geladen werden');
+        return r.json();
+      })
+      .then(data => {
+        const list = document.getElementById('productList');
+
+        // Sortiere neueste zuerst
+        const sortedProducts = (data.products || []).slice().sort((a,b) => new Date(b.created || 0) - new Date(a.created || 0));
+
+        // Maximum z.B. 18 Produkte wie vorher
+        sortedProducts.slice(0, 18).forEach((p, idx) => {
+          const unique = Date.now().toString(36) + '-' + idx;
+          const descId = 'desc-' + unique;
+
+          const d = document.createElement('article');
+          d.className = 'product';
+          d.setAttribute('role','article');
+          d.innerHTML = `
+            <a class="imprint-button" href="${escapeHtml(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Bild in neuem Tab öffnen">🖼️ Ansicht</a>
+            <div class="img-wrap" aria-hidden="false">
+              <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title || 'Artwork')}" loading="lazy">
+            </div>
+            <div class="title">${escapeHtml(p.title || 'Untitled')}</div>
+            <div style="text-align:center;">
+              <button type="button" class="toggle" onclick="toggleDesc('${descId}', this)" aria-expanded="false">show description ▼</button>
+            </div>
+            <div class="description" id="${descId}">
+              ${escapeHtml(p.description || 'Keine Beschreibung verfügbar.')}
+            </div>
+            <div class="buttons-row" aria-hidden="false">
+              <a class="buy-button" href="${escapeHtml(p.payments?.A1 || '#')}" target="_blank" rel="noopener noreferrer" ${p.payments?.A1 ? '' : 'aria-disabled="true"'} title="A1 kaufen">
+                <strong>A1 79,99€</strong><span>84×59cm</span>
+              </a>
+              <a class="buy-button" href="${escapeHtml(p.payments?.A2 || '#')}" target="_blank" rel="noopener noreferrer" ${p.payments?.A2 ? '' : 'aria-disabled="true"'} title="A2 kaufen">
+                <strong>A2 64,99€</strong><span>59×42cm</span>
+              </a>
+              <a class="buy-button" href="${escapeHtml(p.payments?.A3 || '#')}" target="_blank" rel="noopener noreferrer" ${p.payments?.A3 ? '' : 'aria-disabled="true"'} title="A3 kaufen">
+                <strong>A3 39,99€</strong><span>42×30cm</span>
+              </a>
+            </div>
+          `;
+          list.appendChild(d);
+        });
+
+        // einmal anpassen, nachdem DOM aufgebaut
+        setTimeout(adjustImageHeights, 60);
+      })
+      .catch(err => {
+        console.error('Fehler beim Laden:', err);
+        const list = document.getElementById('productList');
+        list.innerHTML = '<div style="grid-column:1/-1;color:var(--muted);text-align:center;padding:24px">Fehler beim Laden der Produkte. Bitte prüfe die Datei products.json.</div>';
+      });
+
+    // Resize: Bildhöhen anpassen (debounced)
+    window.addEventListener('resize', debounce(adjustImageHeights, 120));
+    // Wenn Schriftarten geladen/angepasst sind
+    window.addEventListener('load', () => setTimeout(adjustImageHeights, 80));
+
+    // Leichte HTML-escaping Funktion für Inhalte aus products.json (vermeidet XSS bei ungefilterten Daten)
+    function escapeHtml(str){
+      if(str === null || str === undefined) return '';
+      return String(str)
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'",'&#39;');
+    }
+  </script>
 </body>
 </html>
