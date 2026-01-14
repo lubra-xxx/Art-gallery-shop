@@ -12,8 +12,8 @@
       --card-grad: linear-gradient(145deg, rgba(18,24,38,0.95), rgba(12,16,28,0.98));
       --muted: #aeb3bd;
       --accent-teal: #00d4aa;
-      --accent-gold-strong: #f5bf4a; /* previous gold */
-      --accent-gold-muted-1: #efe2c7; /* new softer gold (buttons) */
+      --accent-gold-strong: #f5bf4a;
+      --accent-gold-muted-1: #efe2c7;
       --accent-gold-muted-2: #e6c88a;
       --glass: rgba(255,255,255,0.03);
       --card-radius: 16px;
@@ -40,7 +40,7 @@
       border-bottom:1px solid rgba(255,255,255,0.03);
       position:relative;
     }
-    /* Top-left imprint button in header */
+    /* Top-left global Impressum button in header */
     .header-imprint {
       position: absolute;
       left: 12px;
@@ -66,7 +66,6 @@
     header h1{
       margin:0;
       font-weight:700;
-      /* make header title responsive and avoid being too large on small screens */
       font-size: clamp(1.1rem, 5.2vw, 1.9rem);
       letter-spacing: -0.02em;
       background: linear-gradient(135deg, var(--accent-teal), #6ad0ff);
@@ -231,14 +230,13 @@
 
     .buttons-row{
       display:flex;
-      gap:12px; /* slightly larger horizontal spacing for visual breathing room */
+      gap:12px;
       justify-content:center;
       margin-top:6px;
     }
 
-    /* Aesthetischere Kauf-Buttons: etwas breiter, weniger hoch, softere Farbe */
+    /* Aesthetischere Kauf-Buttons: etwas breiter, less high, softer color */
     .buy-button{
-      /* make buttons a bit wider visually by allowing them to stretch and giving horizontal padding */
       flex: 1 1 0;
       min-width:0;
       text-decoration:none;
@@ -251,12 +249,11 @@
       gap:3px;
       color:#071022;
       font-weight:700;
-      /* softer gold / sand gradient */
       background: linear-gradient(180deg, var(--accent-gold-muted-1), var(--accent-gold-muted-2));
       box-shadow: 0 8px 20px rgba(230,200,130,0.12), inset 0 -2px 6px rgba(0,0,0,0.04);
       text-align:center;
       transition: transform .14s ease, box-shadow .14s ease;
-      min-height:50px; /* reduced height */
+      min-height:50px;
       border: 1px solid rgba(0,0,0,0.06);
     }
     .buy-button .price{
@@ -300,13 +297,13 @@
 </head>
 <body>
   <header>
-    <!-- Top-left global Impressum button requested -->
-    <a href="impressum.html" class="header-imprint" target="_blank" rel="noopener noreferrer" aria-label="Impressum öffnen">Impressum</a>
+    <!-- Top-left global Impressum button requested; linked to the provided Notion Imprint URL -->
+    <a href="https://frosted-blob-b56.notion.site/Imprint-2d2b4f954da1802c8982c0b4174ff85c?source=copy_link" class="header-imprint" target="_blank" rel="noopener noreferrer" aria-label="Impressum öffnen">Impressum</a>
 
     <h1>Art Gallery</h1>
     <p class="lead">Daily New Artworks</p>
 
-    <!-- The description under the name at the beginning of the page (user requested) -->
+    <!-- The description under the name at the beginning of the page (the requested paragraph) -->
     <p class="description">
       A curated collection of fine art wall prints, designed to elevate modern living spaces. Each piece is crafted for visual balance, high-quality printing, and timeless aesthetics — transforming rooms into refined, atmospheric environments.
     </p>
@@ -355,6 +352,8 @@
         .replaceAll("'",'&#39;');
     }
 
+    const GLOBAL_IMPRINT_URL = 'https://frosted-blob-b56.notion.site/Imprint-2d2b4f954da1802c8982c0b4174ff85c?source=copy_link';
+
     // Lade Produkte
     fetch('products.json')
       .then(r => {
@@ -369,7 +368,7 @@
           const d = document.createElement('article');
           d.className = 'product';
           d.setAttribute('role','article');
-          const imprintUrl = escapeHtml(p.imprint || p.imprintUrl || 'impressum.html');
+          const imprintUrl = escapeHtml(p.imprint || p.imprintUrl || GLOBAL_IMPRINT_URL);
           d.innerHTML = `
             <a class="imprint-button-top" href="${escapeHtml(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Bild in neuem Tab öffnen">🖼️ Ansicht</a>
 
