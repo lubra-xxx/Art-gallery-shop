@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -12,9 +12,10 @@
       --card-grad: linear-gradient(145deg, rgba(18,24,38,0.95), rgba(12,16,28,0.98));
       --muted: #aeb3bd;
       --accent-teal: #00d4aa;
-      --accent-gold-strong: #f5bf4a;
       --accent-gold-muted-1: #efe2c7;
       --accent-gold-muted-2: #e6c88a;
+      --button-friend-start: #dff7f0; /* friendly soft teal */
+      --button-friend-end: #bff0df;
       --glass: rgba(255,255,255,0.03);
       --card-radius: 16px;
       --shadow-1: 0 12px 36px rgba(0,0,0,0.65);
@@ -40,7 +41,7 @@
       border-bottom:1px solid rgba(255,255,255,0.03);
       position:relative;
     }
-    /* Top-left global Impressum button in header */
+    /* Top-left global Imprint button */
     .header-imprint {
       position: absolute;
       left: 12px;
@@ -80,7 +81,7 @@
       font-weight:300;
       font-size: clamp(0.82rem, 3.4vw, 0.98rem);
     }
-    /* the site description under the name (the requested paragraph) */
+    /* required site description under the heading */
     header p.description{
       margin: 8px auto 0;
       max-width:980px;
@@ -145,7 +146,7 @@
       background:transparent;
     }
 
-    .imprint-button-top{
+    .view-button-top{
       position:absolute;
       right:12px;
       top:12px;
@@ -162,7 +163,7 @@
       gap:8px;
       align-items:center;
     }
-    .imprint-button-top:hover{
+    .view-button-top:hover{
       color:var(--accent-teal);
       border-color:var(--accent-teal);
       background: rgba(0,212,170,0.06);
@@ -208,68 +209,43 @@
       border:1px solid rgba(255,255,255,0.03);
     }
 
-    /* Impressum link below product description */
-    .imprint-small{
-      display:block;
-      margin:8px auto 0;
-      font-size:0.78rem;
-      color:var(--muted);
-      text-decoration:none;
-      padding:6px 10px;
-      border-radius:10px;
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.02);
-      transition: all .14s ease;
-      width:fit-content;
-    }
-    .imprint-small:hover{
-      color:var(--accent-teal);
-      border-color:var(--accent-teal);
-      background: rgba(0,212,170,0.04);
-    }
-
     .buttons-row{
       display:flex;
-      gap:12px;
+      gap:10px;
       justify-content:center;
       margin-top:6px;
     }
 
-    /* Aesthetischere Kauf-Buttons: etwas breiter, less high, softer color */
+    /* Buy buttons: smaller, friendlier color (soft teal) */
     .buy-button{
       flex: 1 1 0;
       min-width:0;
       text-decoration:none;
-      border-radius:12px;
-      padding:8px 14px; /* less height, more horizontal padding */
+      border-radius:10px;
+      padding:6px 12px; /* smaller height */
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      gap:3px;
-      color:#071022;
+      gap:2px;
+      color:#04302a; /* dark teal text for contrast */
       font-weight:700;
-      background: linear-gradient(180deg, var(--accent-gold-muted-1), var(--accent-gold-muted-2));
-      box-shadow: 0 8px 20px rgba(230,200,130,0.12), inset 0 -2px 6px rgba(0,0,0,0.04);
+      background: linear-gradient(180deg, var(--button-friend-start), var(--button-friend-end));
+      box-shadow: 0 8px 18px rgba(19,142,118,0.08), inset 0 -1px 4px rgba(0,0,0,0.04);
       text-align:center;
-      transition: transform .14s ease, box-shadow .14s ease;
-      min-height:50px;
+      transition: transform .12s ease, box-shadow .12s ease;
+      min-height:44px;
       border: 1px solid rgba(0,0,0,0.06);
+      font-size: 0.9rem;
     }
-    .buy-button .price{
-      font-size:0.95rem;
-      letter-spacing: -0.01em;
-    }
-    .buy-button .size{
-      font-size:0.74rem;
-      font-weight:600;
-      opacity:0.95;
-    }
+    .buy-button .price{ font-size:0.92rem; }
+    .buy-button .size{ font-size:0.72rem; font-weight:600; opacity:0.95; }
+
     .buy-button:hover:not([aria-disabled="true"]){
-      transform: translateY(-3px);
-      box-shadow: 0 18px 40px rgba(230,200,130,0.18), inset 0 -2px 8px rgba(0,0,0,0.06);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(19,142,118,0.12), inset 0 -2px 6px rgba(0,0,0,0.06);
     }
-    .buy-button[aria-disabled="true"]{ opacity:0.46; pointer-events:none; filter:grayscale(1) brightness(.95) }
+    .buy-button[aria-disabled="true"]{ opacity:0.48; pointer-events:none; filter:grayscale(1) brightness(.95) }
 
     a:focus, button:focus, .toggle:focus { outline: 3px solid rgba(0,212,170,0.14); outline-offset:3px; border-radius:8px; }
 
@@ -279,9 +255,9 @@
       .products-grid{ gap:10px }
       .product{ padding:10px }
       .header-imprint { left: 8px; top: 8px; padding:5px 8px; font-size:0.82rem; }
-      .imprint-button-top{ right:10px; top:10px; padding:5px 6px; font-size:0.82rem }
+      .view-button-top{ right:10px; top:10px; padding:5px 6px; font-size:0.82rem }
       .title{ font-size:0.9rem }
-      .buy-button{ min-height:46px; padding:7px 12px; border-radius:10px }
+      .buy-button{ min-height:42px; padding:6px 10px; border-radius:10px; font-size:0.88rem }
       header p.description{ padding:6px 10px; font-size:0.88rem; }
     }
 
@@ -290,20 +266,21 @@
       .product{ padding:8px }
       .title{ font-size:0.86rem }
       .buy-button .price{ font-size:0.9rem }
-      .buy-button .size{ font-size:0.72rem }
+      .buy-button .size{ font-size:0.7rem }
       header h1{ font-size: clamp(1.0rem, 5.6vw, 1.7rem); }
     }
   </style>
 </head>
 <body>
   <header>
-    <!-- Top-left global Impressum button requested; linked to the provided Notion Imprint URL -->
-    <a href="https://frosted-blob-b56.notion.site/Imprint-2d2b4f954da1802c8982c0b4174ff85c?source=copy_link" class="header-imprint" target="_blank" rel="noopener noreferrer" aria-label="Impressum öffnen">Impressum</a>
+    <!-- Top-left global Imprint button (English) -->
+    <a href="https://frosted-blob-b56.notion.site/Imprint-2d2b4f954da1802c8982c0b4174ff85c?source=copy_link"
+       class="header-imprint" target="_blank" rel="noopener noreferrer" aria-label="Open imprint">Imprint</a>
 
     <h1>Art Gallery</h1>
     <p class="lead">Daily New Artworks</p>
 
-    <!-- The description under the name at the beginning of the page (the requested paragraph) -->
+    <!-- exact English description requested -->
     <p class="description">
       A curated collection of fine art wall prints, designed to elevate modern living spaces. Each piece is crafted for visual balance, high-quality printing, and timeless aesthetics — transforming rooms into refined, atmospheric environments.
     </p>
@@ -311,15 +288,15 @@
 
   <div class="container">
     <div class="products-grid" id="productList" aria-live="polite">
-      <!-- Produkte werden per JS generiert -->
+      <!-- Products generated by JS -->
     </div>
   </div>
 
   <script>
-    // debounce
+    // debounce helper
     function debounce(fn, wait){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); } }
 
-    // Passt Bild-Wrapper-Höhen für exaktes 9:16 Verhältnis (H = W * 16/9)
+    // Set image wrapper height to exact 9:16 ratio
     function adjustImageHeights(){
       document.querySelectorAll('.product .img-wrap').forEach(el=>{
         const w = el.clientWidth || el.getBoundingClientRect().width;
@@ -328,7 +305,7 @@
       });
     }
 
-    // Toggle Beschreibung und Button-Label
+    // Toggle description text and label
     function toggleDesc(id, btn){
       const el = document.getElementById(id);
       if(!el) return;
@@ -336,12 +313,12 @@
       el.style.display = isShown ? 'none' : 'block';
       if(btn){
         btn.setAttribute('aria-expanded', !isShown);
-        btn.textContent = isShown ? 'show description ▼' : 'hide description ▲';
+        btn.textContent = isShown ? 'Show description ▼' : 'Hide description ▲';
       }
       setTimeout(adjustImageHeights, 80);
     }
 
-    // Safestring to avoid XSS
+    // simple escaping
     function escapeHtml(str){
       if(str === null || str === undefined) return '';
       return String(str)
@@ -354,10 +331,10 @@
 
     const GLOBAL_IMPRINT_URL = 'https://frosted-blob-b56.notion.site/Imprint-2d2b4f954da1802c8982c0b4174ff85c?source=copy_link';
 
-    // Lade Produkte
+    // load products.json
     fetch('products.json')
       .then(r => {
-        if(!r.ok) throw new Error('products.json konnte nicht geladen werden');
+        if(!r.ok) throw new Error('products.json could not be loaded');
         return r.json();
       })
       .then(data => {
@@ -368,9 +345,11 @@
           const d = document.createElement('article');
           d.className = 'product';
           d.setAttribute('role','article');
+
           const imprintUrl = escapeHtml(p.imprint || p.imprintUrl || GLOBAL_IMPRINT_URL);
+
           d.innerHTML = `
-            <a class="imprint-button-top" href="${escapeHtml(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Bild in neuem Tab öffnen">🖼️ Ansicht</a>
+            <a class="view-button-top" href="${escapeHtml(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open image in new tab">🖼️ View</a>
 
             <div class="img-wrap" aria-hidden="false">
               <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title || 'Artwork')}" loading="lazy">
@@ -379,25 +358,24 @@
             <div class="title">${escapeHtml(p.title || 'Untitled')}</div>
 
             <div style="text-align:center;">
-              <button type="button" class="toggle" onclick="toggleDesc('${id}', this)" aria-expanded="false">show description ▼</button>
+              <button type="button" class="toggle" onclick="toggleDesc('${id}', this)" aria-expanded="false">Show description ▼</button>
             </div>
 
             <div class="description" id="${id}">
-              ${escapeHtml(p.description || 'Keine Beschreibung verfügbar.')}
-              <a class="imprint-small" href="${imprintUrl}" target="_blank" rel="noopener noreferrer">Impressum</a>
+              ${escapeHtml(p.description || 'No description available.')}
             </div>
 
             <div class="buttons-row" aria-hidden="false">
-              <a class="buy-button" href="${escapeHtml(p.payments?.A1 || '#')}" target="_blank" rel="noopener noreferrer" ${p.payments?.A1 ? '' : 'aria-disabled="true"'} title="A1 kaufen">
-                <span class="price">79,99 €</span>
+              <a class="buy-button" href="${escapeHtml(p.payments?.A1 || '#')}" target="_blank" rel="noopener noreferrer" ${p.payments?.A1 ? '' : 'aria-disabled="true"'} title="Buy A1">
+                <span class="price">79.99 €</span>
                 <span class="size">A1 — 84×59 cm</span>
               </a>
-              <a class="buy-button" href="${escapeHtml(p.payments?.A2 || '#')}" target="_blank" rel="noopener noreferrer" ${p.payments?.A2 ? '' : 'aria-disabled="true"'} title="A2 kaufen">
-                <span class="price">64,99 €</span>
+              <a class="buy-button" href="${escapeHtml(p.payments?.A2 || '#')}" target="_blank" rel="noopener noreferrer" ${p.payments?.A2 ? '' : 'aria-disabled="true"'} title="Buy A2">
+                <span class="price">64.99 €</span>
                 <span class="size">A2 — 59×42 cm</span>
               </a>
-              <a class="buy-button" href="${escapeHtml(p.payments?.A3 || '#')}" target="_blank" rel="noopener noreferrer" ${p.payments?.A3 ? '' : 'aria-disabled="true"'} title="A3 kaufen">
-                <span class="price">39,99 €</span>
+              <a class="buy-button" href="${escapeHtml(p.payments?.A3 || '#')}" target="_blank" rel="noopener noreferrer" ${p.payments?.A3 ? '' : 'aria-disabled="true"'} title="Buy A3">
+                <span class="price">39.99 €</span>
                 <span class="size">A3 — 42×30 cm</span>
               </a>
             </div>
@@ -405,13 +383,13 @@
           list.appendChild(d);
         });
 
-        // adjust after DOM ready
+        // initial adjust
         setTimeout(adjustImageHeights, 60);
       })
       .catch(err => {
-        console.error('Fehler beim Laden:', err);
+        console.error('Error loading products:', err);
         const list = document.getElementById('productList');
-        list.innerHTML = '<div style="grid-column:1/-1;color:var(--muted);text-align:center;padding:24px">Fehler beim Laden der Produkte. Bitte prüfe die Datei products.json.</div>';
+        list.innerHTML = '<div style="grid-column:1/-1;color:var(--muted);text-align:center;padding:24px">Error loading products. Please check products.json.</div>';
       });
 
     window.addEventListener('resize', debounce(adjustImageHeights, 110));
