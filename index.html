@@ -12,9 +12,7 @@
       --card-grad: linear-gradient(145deg, rgba(18,24,38,0.95), rgba(12,16,28,0.98));
       --muted: #aeb3bd;
       --accent-teal: #00d4aa;
-      --accent-gold-muted-1: #efe2c7;
-      --accent-gold-muted-2: #e6c88a;
-      --button-friend-start: #dff7f0; /* friendly soft teal */
+      --button-friend-start: #dff7f0;
       --button-friend-end: #bff0df;
       --glass: rgba(255,255,255,0.03);
       --card-radius: 16px;
@@ -81,7 +79,7 @@
       font-weight:300;
       font-size: clamp(0.82rem, 3.4vw, 0.98rem);
     }
-    /* required site description under the heading */
+    /* exact site description under the heading */
     header p.description{
       margin: 8px auto 0;
       max-width:980px;
@@ -331,7 +329,7 @@
 
     const GLOBAL_IMPRINT_URL = 'https://frosted-blob-b56.notion.site/Imprint-2d2b4f954da1802c8982c0b4174ff85c?source=copy_link';
 
-    // load products.json
+    // load products.json and render ALL products (no limit)
     fetch('products.json')
       .then(r => {
         if(!r.ok) throw new Error('products.json could not be loaded');
@@ -339,8 +337,11 @@
       })
       .then(data => {
         const list = document.getElementById('productList');
+        // keep sorting by date (newest first)
         const items = (data.products || []).slice().sort((a,b) => new Date(b.created || 0) - new Date(a.created || 0));
-        items.slice(0, 18).forEach((p, idx) => {
+
+        // Render all products (no slicing / no limit)
+        items.forEach((p, idx) => {
           const id = 'desc-' + (Date.now().toString(36) + '-' + idx);
           const d = document.createElement('article');
           d.className = 'product';
