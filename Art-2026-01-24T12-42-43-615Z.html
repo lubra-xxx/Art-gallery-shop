@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galactic Majesty</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #050814;
+      color: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+    .page {
+      width: 100%;
+      max-width: 900px;
+      background: radial-gradient(circle at top, #111827 0%, #020617 55%);
+      border-radius: 24px;
+      padding: 32px 24px 40px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+      position: relative;
+    }
+    .art-image {
+      width: 100%;
+      max-width: 600px; /* Bild kleiner */
+      border-radius: 18px;
+      margin: 0 auto 24px;
+      display: block;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+      object-fit: cover;
+    }
+    .title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .description {
+      text-align: center;
+      font-size: 0.98rem;
+      color: #d4d4d8;
+      margin: 0 auto 28px;
+      max-width: 620px;
+      line-height: 1.6;
+    }
+    .buttons-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+    .buy-button {
+      flex: 1 1 160px;
+      max-width: 220px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: none;
+      text-decoration: none;
+      color: #020617;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      background: linear-gradient(135deg,#f97316,#facc15);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+    .buy-button strong {
+      font-size: 0.9rem;
+    }
+    .buy-button span {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #0f172a;
+      opacity: 0.9;
+    }
+    .buy-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(0,0,0,0.5);
+    }
+    .imprint-button {
+      position: absolute;
+      left: 20px;
+      bottom: 16px;
+      font-size: 0.78rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      color: #e5e7eb;
+      background: rgba(15,23,42,0.9);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .imprint-button:hover {
+      background: rgba(15,23,42,1);
+      border-color: rgba(248,250,252,0.9);
+    }
+    .footer-spacer {
+      height: 30px;
+    }
+    @media (max-width: 640px) {
+      .page { padding: 20px 16px 32px; }
+      .imprint-button { position: static; margin-top: 16px; }
+      .footer-spacer { height: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <img src="https://tempfile.aiquickdraw.com/h/38fd7dfdf3e7c93612c956d954cbeae0_1769258331.png" alt="Galactic Majesty" class="art-image">
+
+    <h1 class="title">Galactic Majesty</h1>
+    <p class="description">Experience the serenity of a cool blue night under a majestic galaxy, perfectly captured in this hyper-realistic digital matte painting. The sheer charisma of the crystalline rocks against the magnificence of the vast sky demonstrates the artist's intent to spotlight nature's awe-inspiring grandeur. This photorealistic masterpiece, optimized for large printing formats, is as impressive up close as it is from a distance. Printed on semi-glossy 170 gsm 65 lb paper and framed in durable black pine wood, included with a hanging kit, it's perfect for elevating any indoor space.</p>
+
+    <div class="buttons-row">
+      <a href="https://checkout.stripe.com/c/pay/cs_live_b1CXx29pz2wa5RFKNrJ289dNrFdesQSrPVuX4fMQSRK5AwrdvksNpyBFX0#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blppbHNgWjA0VmJkfXNBdDNkXUFwNHJiPVJpbnZ9Y0ptQ2RLTGpyM1B1TXc9QkB9fEdyQ3VLd3VIcDBDU3w0XXJhV2ZSTGQxSDx1U3RAdnZPRD1PRHxja2FUXERRZGJdNTVIQ38ySWxwUScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl" target="_blank" class="buy-button">
+        <strong>A1 – 79,99€</strong>
+        <span>84,1 × 59,4 cm</span>
+      </a>
+      <a href="https://checkout.stripe.com/c/pay/cs_live_b1pJJQgHc11Z49ZtqHkRB9fNx2UqtSADrFcgmR7YU263tA2f2V9pf641XV#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blppbHNgWjA0VmJkfXNBdDNkXUFwNHJiPVJpbnZ9Y0ptQ2RLTGpyM1B1TXc9QkB9fEdyQ3VLd3VIcDBDU3w0XXJhV2ZSTGQxSDx1U3RAdnZPRD1PRHxja2FUXERRZGJdNTVIQ38ySWxwUScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl" target="_blank" class="buy-button">
+        <strong>A2 – 64,99€</strong>
+        <span>59,4 × 42 cm</span>
+      </a>
+      <a href="https://checkout.stripe.com/c/pay/cs_live_b1nxZL1TogbFN6d9bxdhtsolaaoatsDkzz9oZdMHVWyZY8qs1kAIFn6ams#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blppbHNgWjA0VmJkfXNBdDNkXUFwNHJiPVJpbnZ9Y0ptQ2RLTGpyM1B1TXc9QkB9fEdyQ3VLd3VIcDBDU3w0XXJhV2ZSTGQxSDx1U3RAdnZPRD1PRHxja2FUXERRZGJdNTVIQ38ySWxwUScpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8naHBpcWxabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl" target="_blank" class="buy-button">
+        <strong>A3 – 39,99€</strong>
+        <span>42 × 29,7 cm</span>
+      </a>
+    </div>
+
+    <div class="footer-spacer"></div>
+    <a href="#imprint" class="imprint-button">Imprint</a>
+  </div>
+</body>
+</html>
